@@ -71,7 +71,7 @@ h3 { font-size: 1.45rem; letter-spacing: -.035em; margin-bottom: 1rem; }
 p { margin-bottom: 1rem; }
 code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .93em; }
 .container { width: min(1240px, calc(100% - 6rem)); margin-inline: auto; }
-.skip-link { position: absolute; top: -6rem; left: 1rem; z-index: 10; padding: .8rem 1.25rem; background: var(--white); color: var(--ink); font-weight: 800; box-shadow: var(--shadow); }
+.skip-link { position: fixed; top: -6rem; left: 1rem; z-index: 1000; padding: .8rem 1.25rem; background: var(--white); color: var(--ink); font-weight: 800; box-shadow: var(--shadow); }
 .skip-link:focus { top: 1rem; }
 .site-header {
   position: relative;
@@ -219,7 +219,7 @@ summary:hover { text-decoration: underline; text-underline-offset: .2em; }
 .companion-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 5rem; }
 .companion-grid > div > p:not(.eyebrow) { color: var(--cool-text); }
 .companion-grid h2 { color: var(--mint); }
-.hero a:focus-visible, .principles a:focus-visible, .companion-section a:focus-visible, .boundaries a:focus-visible, .site-footer a:focus-visible, .hero summary:focus-visible, .principles summary:focus-visible, .companion-section summary:focus-visible, .boundaries summary:focus-visible { outline-color: var(--focus-dark); }
+:is(.hero, .principles, .companion-section, .boundaries, .site-footer, .build-card) :is(a, summary):focus-visible { outline-color: var(--focus-dark); }
 .companion-files { display: grid; gap: 1rem; min-width: 0; }
 .file-card { padding: 1.5rem 1.75rem; border: 1px solid rgba(255, 255, 255, .16); border-radius: 20px; background: linear-gradient(145deg, rgba(255, 255, 255, .13), rgba(255, 255, 255, .06)); }
 .file-type { display: block; color: var(--yellow); margin-bottom: .65rem; }
@@ -320,18 +320,18 @@ summary:hover { text-decoration: underline; text-underline-offset: .2em; }
 @media (forced-colors: active) {
   .button, .flight-card, .stage-card, .file-card, .boundaries, .start-steps li, .idea-prompt { border: 1px solid CanvasText; box-shadow: none; }
   .route-number, .stage-number, .native-badge { border: 1px solid CanvasText; }
-  .flight-route li::after { border-color: CanvasText; }
+  .flight-route li:not(:last-child)::after { border-color: CanvasText; }
   .status-dot { background: CanvasText; box-shadow: none; }
 }
 
 @media print {
   body { background: white; color: black; }
-  body::before, .hero::before, .hero::after, .companion-section::before, .flight-card::before, .stage-card::before { display: none; }
+  body::before, .hero::before, .hero::after, .companion-section::before, .flight-card::before, .stage-card::before, .build-card::before { display: none; }
   .container { width: 100%; }
   .site-header, .actions, .skip-link, .skill-download { display: none; }
   .hero, .section, .companion-section { padding-block: 1.5rem; }
   .hero, .section-heading, .companion-grid, .boundaries { display: block; }
-  .hero, .principles, .companion-section, .file-card, .boundaries, .build-card { background: white; color: black; box-shadow: none; }
+  .hero, .principles, .companion-section, .file-card, .boundaries, .build-card, .site-footer { background: white; color: black; box-shadow: none; }
   .flight-card { -webkit-backdrop-filter: none; backdrop-filter: none; box-shadow: none; background: white; color: black; }
   .hero *, .principles *, .companion-section h2, .companion-section p, .companion-section .file-type, .boundaries *, .build-card * { color: black !important; }
   .stage-grid { grid-template-columns: 1fr 1fr; }

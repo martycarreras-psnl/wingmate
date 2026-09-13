@@ -18,7 +18,7 @@
   --focus: #5b21b6;
   --focus-dark: #ffde59;
   --nav: #2c315a;
-  --label-ink: #4d3ca1;
+  --label-accent: #4d3ca1;
   --ice: #d8f8ff;
   --hero-text: #eef4ff;
   --hero-muted: #cfd5ff;
@@ -112,9 +112,10 @@ nav a { font-size: .82rem; font-weight: 800; letter-spacing: .02em; padding: .58
 .hero::before, .hero::after {
   content: "";
   position: absolute;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
 }
+.hero > * { position: relative; z-index: 1; }
 .hero::before {
   width: 30rem;
   height: 30rem;
@@ -180,7 +181,7 @@ h1 em { font-family: Georgia, "Times New Roman", serif; color: var(--yellow); fo
 .principles { margin-block: 0 1rem; background: var(--deep); color: var(--white); }
 .principles-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; padding-block: 1rem; }
 .principles-grid > div { padding: 1.5rem; border: 1px solid rgba(255, 255, 255, .12); border-radius: 20px; background: linear-gradient(135deg, rgba(124, 60, 255, .18), rgba(32, 220, 255, .05)); }
-.mini-label { display: block; margin-bottom: .85rem; color: var(--label-ink); }
+.mini-label { display: block; margin-bottom: .85rem; color: var(--label-accent); }
 .principles .mini-label { color: var(--yellow); }
 .principles h2 { font-size: 1.45rem; letter-spacing: -.035em; }
 .principles p { font-size: .94rem; color: var(--cool-text); margin: 0; }
@@ -326,7 +327,7 @@ summary:hover { text-decoration: underline; text-underline-offset: .2em; }
 
 @media print {
   body { background: white; color: black; }
-  body::before, .hero::before, .hero::after, .companion-section::before, .flight-card::before, .stage-card::before, .build-card::before { display: none; }
+  *::before, *::after { background: transparent !important; border-color: transparent !important; box-shadow: none !important; }
   .container { width: 100%; }
   .site-header, .actions, .skip-link, .skill-download { display: none; }
   .hero, .section, .companion-section { padding-block: 1.5rem; }

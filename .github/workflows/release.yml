@@ -1,0 +1,44 @@
+name: Release Wingmate
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: wingmate-release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - name: Reject stale generated artifacts
+        run: |
+          git diff --exit-code -- downloads docs/README.md docs/LICENSE.txt docs/THIRD-PARTY-NOTICES.md
+          test -z "$(git ls-files --others --exclude-standard -- downloads docs/README.md docs/LICENSE.txt docs/THIRD-PARTY-NOTICES.md)"
+      - name: Publish versioned download files
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          VERSION="$(node -p "JSON.parse(require('fs').readFileSync('package.json', 'utf8')).version")"
+          TAG="v$VERSION"
+          EXISTING_TAG="$(git ls-remote --tags origin "refs/tags/$TAG")"
+          if [ -n "$EXISTING_TAG" ]; then
+            echo "Tag $TAG already exists. Use a new version instead of replacing a release."
+            exit 1
+          fi
+          gh release create "$TAG" downloads/*.zip downloads/App-Workbook.md downloads/App-Journey.html downloads/pack.json \
+            --target "$GITHUB_SHA" --title "Wingmate $VERSION" --notes-file CHANGELOG.md --fail-on-no-commits

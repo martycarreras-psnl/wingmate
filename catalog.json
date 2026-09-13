@@ -1,0 +1,29 @@
+{
+  "skills": [
+    {
+      "name": "shape-my-app",
+      "title": "Shape My App",
+      "phase": "shape"
+    },
+    {
+      "name": "design-my-data",
+      "title": "Design My Data",
+      "phase": "data"
+    },
+    {
+      "name": "pressure-test-my-prototype",
+      "title": "Pressure-Test My Prototype",
+      "phase": "prototype"
+    },
+    {
+      "name": "prove-my-app-works",
+      "title": "Prove My App Works",
+      "phase": "acceptance"
+    },
+    {
+      "name": "release-my-app-responsibly",
+      "title": "Release My App Responsibly",
+      "phase": "release"
+    }
+  ]
+}

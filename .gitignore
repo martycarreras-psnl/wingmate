@@ -1,0 +1,8 @@
+node_modules/
+_site/
+coverage/
+*.tgz
+.DS_Store
+.env
+.env.*
+wingmate-skills/

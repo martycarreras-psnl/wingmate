@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+  <title>Wingmate | App Journey</title>
+  <style>
+    :root { color-scheme: light; font: 17px/1.55 system-ui, sans-serif; color: #172b3a; background: #f3f6fa; }
+    * { box-sizing: border-box; }
+    body { margin: 0; }
+    main { max-width: 1000px; margin: auto; padding: 2rem 1rem 4rem; }
+    h1 { font-size: clamp(2rem, 5vw, 3rem); margin: .2rem 0; line-height: 1.2; }
+    h2 { margin-top: 0; }
+    .eyebrow { color: #365d78; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+    .panel, details { background: white; border: 1px solid #c5d1dc; border-radius: 12px; padding: 1.2rem; margin: 1rem 0; }
+    .now { border-left: 6px solid #235db2; }
+    summary { cursor: pointer; font-weight: 700; padding: .25rem; }
+    details[aria-current="step"] { border: 2px solid #235db2; }
+    .status { display: inline-block; font-size: .85rem; border-radius: 6px; padding: .15rem .5rem; background: #eaf0f8; color: #243f60; }
+    dt { font-weight: 700; }
+    dd { margin: 0 0 .6rem; overflow-wrap: anywhere; }
+    textarea { width: 100%; min-height: 6rem; resize: vertical; padding: .7rem; font: inherit; color: inherit; background: #f8fafc; border: 1px solid #74899c; border-radius: 6px; }
+    button { margin-top: .4rem; background: #235db2; color: white; border: 0; border-radius: 6px; padding: .7rem 1rem; font: inherit; cursor: pointer; }
+    :focus-visible { outline: 3px solid #934800; outline-offset: 3px; }
+    .help, footer { font-size: .9rem; color: #40586e; }
+    nav { display: flex; flex-wrap: wrap; gap: .8rem; margin: 1rem 0; }
+    a { color: #184e9b; text-underline-offset: .2em; }
+    .copy-status { min-height: 1.5em; }
+    @media print { button, nav { display: none; } main { padding: 0; } }
+  </style>
+</head>
+<body>
+<main>
+  <header>
+    <div class="eyebrow">Wingmate | Your app, one step at a time</div>
+    <h1 id="app-name">App Journey - not yet personalized</h1>
+    <p>Shape the idea. Review the data. Build. Challenge the prototype. Prove it works. Release responsibly.</p>
+    <p class="help">Stay in this same Cowork conversation. This guide explains the route; the App Workbook holds the decisions and evidence.</p>
+  </header>
+  <section class="panel now" aria-labelledby="now-title">
+    <h2 id="now-title">Where we are now</h2>
+    <dl>
+      <dt>Current stage</dt><dd id="current-stage">Not yet established</dd>
+      <dt>What we are working on</dt><dd id="current-task">Your first skill will personalize this guide from the conversation.</dd>
+      <dt>Next action</dt><dd id="next-action">Describe your idea using Shape My App, or ask the relevant skill to resume existing work.</dd>
+      <dt>What is blocking progress</dt><dd id="blockers">Not assessed. No gates or results are assumed.</dd>
+      <dt>Recent progress</dt><dd id="recent-progress">No recorded progress in this template.</dd>
+    </dl>
+    <div class="prompt">
+      <label for="prompt-next"><strong>Your next prompt</strong></label>
+      <textarea id="prompt-next" readonly>Use Shape My App to help me explore my app idea. Ask one question at a time and keep our workbook and journey guide up to date.</textarea>
+      <button type="button" hidden>Copy prompt</button>
+      <p class="copy-status help" role="status" aria-live="polite"></p>
+    </div>
+    <p class="help">Copy, then paste into Cowork yourself. Buttons do not invoke skills or approve actions. If copying is unavailable, select the prompt manually.</p>
+  </section>
+  <h2>The whole journey</h2>
+  <nav aria-label="Journey stages">
+    <a href="#shape">1. Shape</a><a href="#data">2. Data</a><a href="#build">3. Build</a>
+    <a href="#prototype">4. Pressure-test</a><a href="#acceptance">5. Prove</a><a href="#release">6. Release</a>
+  </nav>
+  <details id="shape" open>
+    <summary>1. Shape the idea <span class="status" id="status-shape">Not started</span></summary>
+    <p><strong>Skill: Shape My App.</strong> Clarify who needs the app, what outcome matters, workflow exceptions, scope, and visual direction. Grilling means one useful question at a time, with a recommendation.</p>
+    <p><strong>Produces:</strong> a brief, shared business terms, visual direction, and measurable acceptance criteria. <strong>Gate:</strong> explicit approval of the current brief.</p>
+    <p id="note-shape">No brief approval recorded.</p>
+    <div class="prompt"><label for="prompt-shape">Prompt to resume this stage</label>
+      <textarea id="prompt-shape" readonly>Use Shape My App to resume our current idea from the workbook. Ask only the next unresolved question and update our journey guide.</textarea>
+      <button type="button" hidden>Copy prompt</button><p class="copy-status help" role="status" aria-live="polite"></p></div>
+  </details>
+  <details id="data">
+    <summary>2. Review the data <span class="status" id="status-data">Not started</span></summary>
+    <p><strong>Skill: Design My Data.</strong> Reuse authoritative sources, clarify records and relationships, and determine who may see or change what.</p>
+    <p><strong>Produces:</strong> a data/access plan and scoped build handoff. <strong>Gate:</strong> current brief and data-plan approvals; unresolved live-data capabilities stay blocked.</p>
+    <p id="note-data">Source ownership, operations, and exposure are not yet reviewed.</p>
+    <div class="prompt"><label for="prompt-data">Prompt to resume this stage</label>
+      <textarea id="prompt-data" readonly>Use Design My Data with our current workbook. Reuse confirmed answers and identify the next missing data or access decision before building.</textarea>
+      <button type="button" hidden>Copy prompt</button><p class="copy-status help" role="status" aria-live="polite"></p></div>
+  </details>
+  <details id="build">
+    <summary>3. Build the approved plan <span class="status" id="status-build">Not started</span></summary>
+    <p><strong>Native skill: /app.</strong> The human invokes the native builder here, after reviewing its proposed actions. This pack does not invoke it automatically.</p>
+    <p><strong>Produces:</strong> an identifiable preview for review, not release proof. <strong>Gate:</strong> valid brief/data approvals and an explicitly scoped handoff. Do not publish.</p>
+    <p id="note-build">Awaiting approved build scope. This card will contain the scoped /app prompt when ready.</p>
+    <div class="prompt"><label for="prompt-build">Current safe action for this stage</label>
+      <textarea id="prompt-build" readonly>Use Design My Data to check our current brief and data-plan approvals. Resolve the next blocker before giving me the scoped native /app build prompt.</textarea>
+      <button type="button" hidden>Copy prompt</button><p class="copy-status help" role="status" aria-live="polite"></p></div>
+  </details>
+  <details id="prototype">
+    <summary>4. Pressure-test the prototype <span class="status" id="status-prototype">Not started</span></summary>
+    <p><strong>Skill: Pressure-Test My Prototype.</strong> Challenge realistic workflows and exceptions, compare the design with your direction, and find functional gaps.</p>
+    <p><strong>Produces:</strong> findings tied to requirements, safe non-browser test results where available, and scoped repairs. <strong>Gate:</strong> critical findings resolved and prototype approval.</p>
+    <p id="note-prototype">No preview review evidence recorded. Screenshots alone do not prove interactive behavior.</p>
+    <div class="prompt"><label for="prompt-prototype">Prompt to resume this stage</label>
+      <textarea id="prompt-prototype" readonly>Use Pressure-Test My Prototype on our current build against the workbook. Find gaps using available safe non-browser tests and ask me only for missing UI evidence. Update the workbook and journey.</textarea>
+      <button type="button" hidden>Copy prompt</button><p class="copy-status help" role="status" aria-live="polite"></p></div>
+  </details>
+  <details id="acceptance">
+    <summary>5. Prove it works <span class="status" id="status-acceptance">Not started</span></summary>
+    <p><strong>Skill: Prove My App Works.</strong> Connect each requirement to actual test evidence for the current build. Recheck failed and affected paths after repairs.</p>
+    <p><strong>Produces:</strong> passed, failed, blocked, not-run, and stale results with evidence limits. <strong>Gate:</strong> required checks have current passing evidence; a checklist is not a pass.</p>
+    <p id="note-acceptance">No acceptance execution recorded. Static findings and human reports remain clearly attributed.</p>
+    <div class="prompt"><label for="prompt-acceptance">Prompt to resume this stage</label>
+      <textarea id="prompt-acceptance" readonly>Use Prove My App Works to check our current build against the workbook. Run available safe non-browser checks, record actual evidence and gaps, and keep the journey current.</textarea>
+      <button type="button" hidden>Copy prompt</button><p class="copy-status help" role="status" aria-live="polite"></p></div>
+  </details>
+  <details id="release">
+    <summary>6. Release responsibly <span class="status" id="status-release">Not started</span></summary>
+    <p><strong>Skill: Release My App Responsibly.</strong> Review the exact build, audience, data exposure, ownership, support, and recovery before sharing.</p>
+    <p><strong>Produces:</strong> a human-gated release handoff. <strong>Gate:</strong> current evidence and explicit release approval. Publication is a separate human action and requires evidence afterward.</p>
+    <p id="note-release">Release has not been approved; publication is unverified.</p>
+    <div class="prompt"><label for="prompt-release">Prompt to resume this stage</label>
+      <textarea id="prompt-release" readonly>Use Release My App Responsibly to review our current build, audience, and evidence. Show remaining blockers before requesting approval. Do not publish or share.</textarea>
+      <button type="button" hidden>Copy prompt</button><p class="copy-status help" role="status" aria-live="polite"></p></div>
+  </details>
+  <section class="panel" aria-labelledby="snapshot-title">
+    <h2 id="snapshot-title">About this saved snapshot</h2>
+    <dl>
+      <dt>Workbook location</dt><dd id="workbook-location">Not saved - template only</dd>
+      <dt>Source workbook revision</dt><dd id="workbook-revision">Not established</dd>
+      <dt>Source workbook last updated</dt><dd id="workbook-updated">Not established</dd>
+      <dt>Journey refreshed</dt><dd id="journey-updated">Not established</dd>
+      <dt>Build being reviewed</dt><dd id="build-identity">No build identified</dd>
+    </dl>
+    <p>The skills refresh this file alongside workbook updates while active. It is not a live connection. After native /app work, the next pack skill reconciles the result. If the workbook is newer, ask the current skill to refresh this guide.</p>
+  </section>
+  <footer>
+    <p>All stages stay in one conversation. If routing needs help, select the named skill through Sources. Pack skill names are not slash commands.</p>
+    <p>Changing scope, data, build, or audience may require earlier review. Stage completion applies only to recorded scope. No browser/computer-use automation is part of this method.</p>
+    <p>This guide contains project context: keep its access as restricted as the workbook.</p>
+  </footer>
+</main>
+<script>
+  for (const group of document.querySelectorAll('.prompt')) {
+    const button = group.querySelector('button');
+    const field = group.querySelector('textarea');
+    const status = group.querySelector('.copy-status');
+    button.hidden = false;
+    button.addEventListener('click', async () => {
+      try {
+        if (!navigator.clipboard?.writeText) throw new Error('Clipboard unavailable');
+        await navigator.clipboard.writeText(field.value);
+        status.textContent = 'Copied. Paste into this Cowork conversation; nothing has been invoked.';
+      } catch {
+        field.focus();
+        field.select();
+        status.textContent = 'Automatic copy unavailable. Copy the selected text manually, then paste into Cowork.';
+      }
+    });
+  }
+</script>
+</body>
+</html>

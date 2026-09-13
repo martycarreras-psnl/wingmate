@@ -1,0 +1,68 @@
+{
+  "package": "wingmate",
+  "version": "0.1.0",
+  "skills": [
+    {
+      "name": "shape-my-app",
+      "title": "Shape My App",
+      "phase": "shape"
+    },
+    {
+      "name": "design-my-data",
+      "title": "Design My Data",
+      "phase": "data"
+    },
+    {
+      "name": "pressure-test-my-prototype",
+      "title": "Pressure-Test My Prototype",
+      "phase": "prototype"
+    },
+    {
+      "name": "prove-my-app-works",
+      "title": "Prove My App Works",
+      "phase": "acceptance"
+    },
+    {
+      "name": "release-my-app-responsibly",
+      "title": "Release My App Responsibly",
+      "phase": "release"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "shape-my-app.zip",
+      "bytes": 29482,
+      "sha256": "9fb62583cd950053d8fc01549be50d702fe97c4e8fdd43e4f90e7d7f1f662db1"
+    },
+    {
+      "file": "design-my-data.zip",
+      "bytes": 29659,
+      "sha256": "2ec05cc26fad807def1f96d3e20d92595d4ea516ccc318fa4fa41d4a28836efb"
+    },
+    {
+      "file": "pressure-test-my-prototype.zip",
+      "bytes": 29742,
+      "sha256": "ce8e2a9ae9714bd3cce401e4f3b061be3c1a30fc9d50e6ac4a2f966b44bc03f1"
+    },
+    {
+      "file": "prove-my-app-works.zip",
+      "bytes": 29637,
+      "sha256": "6293aeb0548978125b628ed45a474b49e262c9344b54a72a12e1a351b8be1b9a"
+    },
+    {
+      "file": "release-my-app-responsibly.zip",
+      "bytes": 29138,
+      "sha256": "6ca4ad0eb5b15d8b100ad003b0ec8060745800ce6c3e96e001ad1e169c380d17"
+    },
+    {
+      "file": "App-Workbook.md",
+      "bytes": 7698,
+      "sha256": "34a7b9587f827730e4a653dc4b00d9cec7045df2847934d4bf6bd8b45f0c87dd"
+    },
+    {
+      "file": "App-Journey.html",
+      "bytes": 12440,
+      "sha256": "1dc85e5722ee9d34a45bf4564f75791d157b4f6cd5a2e4c241db4cb6caf0171c"
+    }
+  ]
+}

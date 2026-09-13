@@ -1,0 +1,32 @@
+name: Validate Wingmate
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-node@v5
+        with:
+          node-version: '22'
+          cache: npm
+      - run: npm ci --ignore-scripts
+      - run: npm run check
+      - name: Reject stale generated artifacts
+        run: |
+          git diff --exit-code -- downloads docs/README.md docs/LICENSE.txt docs/THIRD-PARTY-NOTICES.md
+          test -z "$(git ls-files --others --exclude-standard -- downloads docs/README.md docs/LICENSE.txt docs/THIRD-PARTY-NOTICES.md)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: wingmate-downloads
+          path: downloads/
+          if-no-files-found: error

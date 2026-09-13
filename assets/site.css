@@ -15,7 +15,8 @@
   --magenta: #ff4fd8;
   --yellow: #ffd166;
   --mint: #ccffe6;
-  --focus: #ffb800;
+  --focus: #5b21b6;
+  --focus-dark: #ffde59;
   --nav: #2c315a;
   --label: #4d3ca1;
   --ice: #d8f8ff;
@@ -218,7 +219,7 @@ summary:hover { text-decoration: underline; text-underline-offset: .2em; }
 .companion-grid { position: relative; display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 5rem; }
 .companion-grid > div > p:not(.eyebrow) { color: var(--cool-text); }
 .companion-grid h2 { color: var(--mint); }
-.companion-section a:focus-visible { outline-color: var(--focus); }
+.hero a:focus-visible, .principles a:focus-visible, .companion-section a:focus-visible, .boundaries a:focus-visible, .site-footer a:focus-visible, .hero summary:focus-visible, .principles summary:focus-visible, .companion-section summary:focus-visible, .boundaries summary:focus-visible { outline-color: var(--focus-dark); }
 .companion-files { display: grid; gap: 1rem; min-width: 0; }
 .file-card { padding: 1.5rem 1.75rem; border: 1px solid rgba(255, 255, 255, .16); border-radius: 20px; background: linear-gradient(145deg, rgba(255, 255, 255, .13), rgba(255, 255, 255, .06)); }
 .file-type { display: block; color: var(--yellow); margin-bottom: .65rem; }
@@ -296,7 +297,7 @@ summary:hover { text-decoration: underline; text-underline-offset: .2em; }
   .site-header nav { width: 100%; justify-content: space-between; gap: .25rem; }
   .site-header nav a { font-size: .76rem; padding-inline: .55rem; }
   .eyebrow { font-size: .72rem; }
-  h1 { font-size: clamp(2.75rem, 15vw, 4rem); }
+  h1 { font-size: clamp(2.65rem, 11vw, 3.75rem); overflow-wrap: break-word; }
   h2 { font-size: clamp(2rem, 11vw, 3rem); }
   .hero { padding: 1.35rem; border-radius: 20px; }
   .hero::after { inset: 1rem; border-radius: 16px; }
@@ -317,7 +318,6 @@ summary:hover { text-decoration: underline; text-underline-offset: .2em; }
 }
 
 @media (forced-colors: active) {
-  body::before, .hero::before, .hero::after, .companion-section::before, .flight-card::before, .stage-card::before { display: none; }
   .button, .flight-card, .stage-card, .file-card, .boundaries, .start-steps li, .idea-prompt { border: 1px solid CanvasText; box-shadow: none; }
   .route-number, .stage-number, .native-badge { border: 1px solid CanvasText; }
   .flight-route li::after { border-color: CanvasText; }

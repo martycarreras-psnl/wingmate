@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.1.1 - 2026-09-14
+
+- Refine landing-page typography with a neutral local sans-serif, lighter heading
+  weights, more open letter spacing, and upright headline emphasis.
+- Preserve the existing layout, colors, content, and skill behavior.
+
 ## 0.1.0 - 2026-09-13
 
 Initial standalone Wingmate snapshot.

@@ -35,7 +35,7 @@
   --hairline-light: rgba(255, 255, 255, .18);
   --hairline-strong: rgba(255, 255, 255, .22);
   --shadow: 0 24px 70px rgba(19, 13, 60, .16);
-  font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+  font-family: Arial, Helvetica, sans-serif;
   color: var(--ink);
   background:
     radial-gradient(circle at top left, rgba(124, 60, 255, .14), transparent 34rem),
@@ -66,10 +66,10 @@ a:focus-visible, summary:focus-visible { outline: 3px solid var(--focus); outlin
 ::selection { color: var(--deep); background: var(--cyan); }
 h1, h2, h3, p { margin-top: 0; }
 h1, h2, h3 { line-height: 1.04; text-wrap: balance; }
-h1, h2 { letter-spacing: -.065em; }
-h1 { font-size: clamp(3.6rem, 7.8vw, 7.8rem); font-weight: 800; margin-bottom: 1.65rem; }
-h2 { font-size: clamp(2.25rem, 4vw, 4.15rem); font-weight: 800; margin-bottom: 1.25rem; }
-h3 { font-size: 1.45rem; letter-spacing: -.035em; margin-bottom: 1rem; }
+h1, h2 { letter-spacing: -.025em; }
+h1 { font-size: clamp(3.6rem, 7.8vw, 7.8rem); font-weight: 700; margin-bottom: 1.65rem; }
+h2 { font-size: clamp(2.25rem, 4vw, 4.15rem); font-weight: 700; margin-bottom: 1.25rem; }
+h3 { font-size: 1.45rem; letter-spacing: -.015em; margin-bottom: 1rem; }
 p { margin-bottom: 1rem; }
 code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-size: .93em; }
 .container { width: min(1240px, calc(100% - 6rem)); margin-inline: auto; }
@@ -84,7 +84,7 @@ code { font-family: ui-monospace, "Cascadia Code", Consolas, monospace; font-siz
   backdrop-filter: blur(18px);
 }
 .header-inner { display: flex; justify-content: space-between; align-items: center; gap: 2rem; min-height: 96px; }
-.wordmark { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; font-size: 1.9rem; font-weight: 800; letter-spacing: -.075em; line-height: 1; }
+.wordmark { display: inline-flex; align-items: center; gap: .7rem; text-decoration: none; font-size: 1.9rem; font-weight: 700; letter-spacing: -.025em; line-height: 1; }
 .wordmark img { filter: drop-shadow(0 8px 18px rgba(124, 60, 255, .2)); }
 .wordmark-dot { color: var(--magenta); }
 nav { display: flex; flex-wrap: wrap; gap: .55rem; align-items: center; }
@@ -141,7 +141,7 @@ nav a { font-size: .82rem; font-weight: 800; letter-spacing: .02em; padding: .58
 .eyebrow { margin-bottom: 1.45rem; }
 .status-dot { display: inline-block; width: .6rem; height: .6rem; background: var(--cyan); border-radius: 50%; margin-right: .55rem; vertical-align: .04em; box-shadow: 0 0 0 .22rem rgba(32, 220, 255, .18); }
 .hero .eyebrow { color: var(--ice); }
-h1 em { font-family: Georgia, "Times New Roman", serif; color: var(--yellow); font-weight: 400; }
+h1 em { color: var(--yellow); font-style: normal; font-weight: inherit; }
 .hero-hook { font-size: clamp(1.17rem, 1.8vw, 1.55rem); line-height: 1.5; color: var(--hero-text); }
 .hero-hook strong { color: var(--mint); font-weight: 800; }
 .hero-description { max-width: 35rem; color: var(--hero-muted); font-size: 1.08rem; margin-bottom: 2rem; }
@@ -185,7 +185,7 @@ h1 em { font-family: Georgia, "Times New Roman", serif; color: var(--yellow); fo
 .principles-grid > div { padding: 1.5rem; border: 1px solid rgba(255, 255, 255, .12); border-radius: 20px; background: linear-gradient(135deg, rgba(124, 60, 255, .18), rgba(32, 220, 255, .05)); }
 .mini-label { display: block; margin-bottom: .85rem; color: var(--label-accent); }
 .principles .mini-label { color: var(--yellow); }
-.principles h2 { font-size: 1.45rem; letter-spacing: -.035em; }
+.principles h2 { font-size: 1.45rem; letter-spacing: -.015em; }
 .principles p { font-size: .94rem; color: var(--cool-text); margin: 0; }
 .section { padding-block: 6rem; }
 .section-heading { display: grid; grid-template-columns: 1.18fr 1fr; gap: 4rem; align-items: end; margin-bottom: 2.75rem; }

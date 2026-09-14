@@ -1,10 +1,20 @@
 ---
 name: release-my-app-responsibly
-description: "Use when someone wants a pre-publication readiness review, audience/data exposure check, release handoff, or assessment of an updated Cowork app before sharing. Reviews evidence and requests human approval; never publishes, shares, changes permissions, or assumes rollback."
+description: "Reviews whether a built Cowork app is genuinely ready to share — checking acceptance evidence, who would see what data, known defects, an accountable owner, and recovery options — then hands off to a human to publish. Use when the user says \"is my app ready to share\", \"review this before I publish\", \"who will be able to see this data\", \"can I roll this out to my team\", \"release readiness check\", or is widening an existing app's audience. Do NOT use for shaping an idea (use shape-my-app), planning data (use design-my-data), or running the tests themselves (use prove-my-app-works). Never publishes, shares, changes permissions, or assumes rollback exists."
 license: MIT
 ---
 
 # Release My App Responsibly
+
+## When NOT to Use
+
+- **Running the acceptance tests** — use **prove-my-app-works**; this skill reviews evidence, it does not
+  produce it.
+- **Reviewing a preview for gaps or look-and-feel** — use **pressure-test-my-prototype**.
+- **Changing scope or the data model** — use **shape-my-app** or **design-my-data**.
+- **Actually publishing, sharing, or granting access** — an authorized human does that through native
+  Cowork publication; this skill never performs it.
+- Rolling back, revoking access, or running deployment commands.
 
 ## Start here
 
@@ -55,6 +65,43 @@ Do not publish, share, change access, or run deployment commands.
    required gates are satisfied. Approval must be a separate human response.
 7. Record approval against the exact revision, build, audience, and approver.
    Approval does not itself publish an app or broaden anybody's data permissions.
+
+## Output format
+
+Record workbook section 7 and present the recommendation in chat using this shape:
+
+```
+Release scope   — exact app, build, proposed audience, requirements revision
+Readiness       — one of: ready | blocked | ready with accepted limitations
+Evidence        — table: REQ ID | required check | current result | date | stale?
+Data exposure   — table: recipient group | can see | can do | how enforced | evidence
+Limitations     — known defects and deferrals, each with an accepting owner and reason
+Blockers        — every unresolved item, with what would clear it
+Owner & support — accountable business owner and the support route
+```
+
+Never present a readiness verdict without the evidence table behind it.
+
+## Guardrails
+
+- Never publish, share, change access, run deployment commands, or claim to revoke access.
+- Missing or stale evidence blocks readiness — writing a checklist does not fulfill it, and only
+  noncritical deferrals may be accepted, each with a named owner and reason.
+- A new build or a broader audience invalidates prior approval; re-review affected requirements, data,
+  and tests rather than treating old approval as blanket approval.
+- Never assume sharing preserves source-level permissions. Hidden UI, maker access, and user-identity
+  sign-in alone are not sufficient evidence of who can see what.
+- Never assume rollback or backup exists — git backing and version isolation are not proof. High-impact
+  writes without verified recovery stay blocked.
+- Ask one missing-evidence question at a time, with a recommendation.
+- Never invent UI controls, deployment stages, commands, or rollback steps; if native behavior differs
+  from the reviewed plan, stop and reassess against
+  [platform boundaries](references/platform-boundaries.md).
+- Approval requires an explicit `APPROVE RELEASE rN` as a separate human response, recorded against the
+  exact revision, build, audience, and approver — and approval alone neither publishes the app nor
+  broadens anyone's permissions.
+- Record publication as unverified until the human supplies the actual published URL/version and a
+  recipient check.
 
 ## Human publication handoff
 

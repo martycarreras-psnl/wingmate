@@ -118,7 +118,7 @@ The all-in-one download bundle lives in `downloads/Wingmate-Skills.zip`.
 | `skills/` | Five canonical `SKILL.md` bodies |
 | `references/` | Shared method, workbook, journey HTML, visual direction, and testing guidance |
 | `catalog.json` | Skill names and phase mapping |
-| `evaluations/` | 37 behavioral pilot scenarios and procedure |
+| `evaluations/` | 42 behavioral pilot scenarios and procedure |
 | `scripts/`, `bin/`, `tests/` | Standalone build, export, site staging, and checks |
 | `downloads/` | Committed, generated distribution; do not edit directly |
 | `index.html`, `assets/` | Public landing page |

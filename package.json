@@ -1,6 +1,6 @@
 {
   "name": "wingmate",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": true,
   "type": "module",
   "description": "Big ideas deserve a good wingmate. A guided, repeatable method for building apps with Microsoft Copilot Cowork.",

@@ -101,6 +101,13 @@ Verify guide creation when starting at a later skill with an existing workbook.
   the skill persists or maintains a personalized guide.
 - Human reviewer approves the versioned pilot record before managed distribution.
 
+- Run EVAL-038 through EVAL-042 for the optimized trigger phrases, output
+  formats, and routing exclusions. Exercise each initial request and subsequent
+  out-of-phase request with explicit selection and with all skills enabled.
+  Confirm routing preserves the current workbook, journey, and unresolved gates.
+
 Cowork may expose native skill evaluation. If available, use it alongside these
 cases, not as a replacement for the app journey or as Microsoft certification.
-No tenant evaluation results are bundled in this initial pack.
+No tenant evaluation results are bundled in this pack. Quality scores and test
+claims in the supplied optimization archive are not a versioned Wingmate pilot
+record and do not establish results for the rebuilt release.

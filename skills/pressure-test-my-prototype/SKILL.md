@@ -1,10 +1,20 @@
 ---
 name: pressure-test-my-prototype
-description: "Use when someone wants to pressure-test a Cowork app, find functional gaps, or compare it with agreed visual direction. Runs available safe non-browser app-code or service tests; requests targeted human UI evidence. Never invokes or troubleshoots browser/computer use."
+description: "Pressure-tests a Cowork app preview against real user scenarios — hunting workflow gaps, confusing paths, missing edge cases, and drift from the agreed visual direction — then records findings against requirement IDs. Use when the user says \"pressure-test my prototype\", \"poke holes in this app\", \"review my preview\", \"does this match the design we agreed\", \"what's missing from this build\", or shares a preview for critique. Do NOT use for shaping an idea (use shape-my-app), planning data (use design-my-data), formal acceptance testing (use prove-my-app-works), or publishing (use release-my-app-responsibly). Never invokes or troubleshoots browser/computer use."
 license: MIT
 ---
 
 # Pressure-Test My Prototype
+
+## When NOT to Use
+
+- **No preview or review evidence exists** — go back to **shape-my-app** or the native `/app` build first.
+- **Formal requirement-by-requirement acceptance testing** — use **prove-my-app-works**.
+- **Changing the data model or scope** — route to **design-my-data** or **shape-my-app**; this skill
+  records findings, it does not redesign.
+- **Publishing or sharing** — use **release-my-app-responsibly**.
+- **Anything requiring a browser or computer use** — out of scope by design; request human evidence instead.
+- Rebuilding the app or mutating live data.
 
 ## Start here
 
@@ -75,6 +85,49 @@ the isolated scope defined in the functional testing protocol.
    using the same safe execution protocol.
 8. When the primary flow is understandable and critical findings are resolved,
    request `APPROVE PROTOTYPE rN`. Record the specific preview and scope.
+
+## Output format
+
+Record workbook section 5 (and section 6 for anything executed) and summarize in chat as markdown
+sections, each finding a bullet and each table a real markdown table, in this order:
+
+```
+Findings        — feedback ID | affected REQ/DATA IDs | what happened | expected | severity | decision
+                  decision is exactly one of: accept | reject | defer, each with an owner and rationale
+Paths walked    — happy, empty, error, rejected, overdue, missing-owner — with status per path
+Visual check    — section 1a aspect | agreed | observed | verdict, or "unreviewed" when evidence is absent
+Executed tests  — TEST ID | expected | actual | evidence | cleanup status
+Blocked         — what could not be checked, and why
+Next question   — one atomic follow-up with a recommendation and lettered choices
+```
+
+Separate a preference from a workflow defect or an incorrect business model in every finding.
+Show the findings table before asking the next question, and review it with the user before recording
+any accept/reject/defer decision.
+
+## Guardrails
+
+- Never invoke, troubleshoot, or recommend browser/computer use, including alternate browser runners.
+- Inspect the app's own tools, scripts, and test files to decide what can be run — never invent a tool or
+  a test runner that the session does not actually expose.
+- If the preview, build, or review evidence is missing, unavailable, or cannot be opened, say so plainly and
+  request only the blocked step; never fabricate a finding, a screenshot, or an observed behavior.
+- Always confirm the primary flow is understandable with the user before requesting prototype approval.
+- Never mutate live data or rebuild the app; test-record mutations require the isolated scope defined in
+  the functional testing protocol, with recorded cleanup.
+- If the data mode is unknown, treat every interaction as a potentially live write.
+- Ask one atomic follow-up at a time, with a recommendation and lettered choices — never a questionnaire,
+  and never "do you like the design?" in place of a concrete scenario.
+- Do not stop at instructions for the user when you can safely run the path yourself; equally, never claim a
+  path was exercised when it was only inspected. Static inspection is not a test pass.
+- Never infer a stored change from a toast or success message alone.
+- If visual evidence is unavailable, record the comparison as unreviewed rather than assuming a match; and
+  never assume the user wanted every detail of an inspiration screenshot replicated.
+- Surface accessibility and usability conflicts even when the preview looks close to the reference.
+- A visually simulated manager view is not evidence of real authorization, and prototype success is not
+  proof of persisted writes, working connectors, or release readiness — preserve those distinctions.
+- Material changes increment the revision and invalidate affected approvals; say so rather than carrying a
+  stale approval forward.
 
 ## Handoff
 

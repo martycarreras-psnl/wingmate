@@ -1,10 +1,19 @@
 ---
 name: shape-my-app
-description: "Use when someone asks to shape an app idea, grill me about a business app, define an MVP, or choose a visual direction using a brand guide or inspiration screenshot before Cowork /app. Clarifies scope one question at a time. Not for building, connecting data, testing a build, or publishing."
+description: "Shapes a rough business app idea into an approved, scoped brief before Cowork /app builds anything — one clarifying question at a time, with a confirmed visual direction. Use when the user says \"help me shape my app idea\", \"grill me about this app\", \"define the MVP\", \"what should my app actually do\", \"pick a visual direction from my brand guide\", or shares an inspiration screenshot before building. Do NOT use for building the app, connecting data (use design-my-data instead), testing a build, or publishing."
 license: MIT
 ---
 
 # Shape My App
+
+## When NOT to Use
+
+- **Building the app** — this skill never invokes `/app`; the native App skill owns the build.
+- **Connecting data or choosing a schema** — use **design-my-data** instead, after the brief is approved.
+- **Testing an existing build** — use **prove-my-app-works** for acceptance testing, or
+  **pressure-test-my-prototype** for a built preview.
+- **Publishing or sharing** — use **release-my-app-responsibly** instead.
+- General questions about what Cowork apps can do, with no idea to shape — answer those directly.
 
 ## Start here
 
@@ -61,6 +70,35 @@ Do not build, provision, or invoke `/app`.
 9. Present the draft brief, including Visual Direction, for review. Request `APPROVE BRIEF rN` for its actual
    revision as a separate human response. Until then it is a draft, not approved.
    Record approval scope/date/person; later material edits invalidate it.
+
+## Output format
+
+Deliver the brief as markdown sections in this order, in chat (and into the workbook when one exists):
+
+```
+1.  Business objective      — short paragraph, facts separated from assumptions
+1a. Visual Direction        — confirmed direction; required branding listed apart from inspiration
+2.  Scope                   — MVP table: requirement ID | requirement | acceptance criterion
+4.  Non-goals & deferred    — bulleted, with unconfirmed assumptions called out
+    Review depth            — standard or enhanced, with rationale
+```
+
+Keep each requirement to one observable acceptance criterion. Close every turn with the single
+next question, never a questionnaire.
+
+## Guardrails
+
+- Never invoke `/app`, provision resources, connect data, or write to any live system from this skill.
+- Always ask exactly one atomic question per turn, with your recommended answer, then wait.
+- Never fabricate an approval chain, automation, AI agent, org hierarchy, or user need the human did not state.
+- If required context is missing or cannot be found — the primary user, the core outcome, the approver —
+  record it as an open blocker and ask about it; do not fill the gap with an assumption presented as fact.
+- If a brand guide or screenshot is unavailable or unreadable, say so and offer a recommended direction
+  instead; never claim to have reviewed material you could not open.
+- Always present the draft brief for review and confirm before treating it as approved — approval requires
+  an explicit `APPROVE BRIEF rN` from the human, and later material edits invalidate it.
+- Do not restate platform capabilities without checking
+  [platform boundaries](references/platform-boundaries.md) first.
 
 ## Handoff
 

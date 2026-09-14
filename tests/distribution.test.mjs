@@ -97,6 +97,34 @@ test('public site builds repeatably with resolved relative HTML and Markdown lin
   }
 });
 
+test('site download links serve the current bundle and canonical skill bodies', async t => {
+  const directory = await fixture(t);
+  const output = await buildSite(directory);
+  const html = await readFile(path.join(output, 'index.html'), 'utf8');
+  const links = [...html.matchAll(/href="([^"]+\.zip)"[^>]*\bdownload/g)];
+  assert.ok(links.some(([, href]) => href === 'downloads/Wingmate-Skills.zip'),
+    'Site must expose the skill bundle download');
+  const pkg = JSON.parse(await readFile(path.join(directory, 'package.json')));
+  for (const [, href] of links) {
+    const bytes = await readFile(path.join(output, href));
+    assert.deepEqual(bytes, await readFile(path.join(directory, href)));
+    if (href !== 'downloads/Wingmate-Skills.zip') continue;
+    const bundle = unzipSync(bytes);
+    const manifest = JSON.parse(Buffer.from(bundle['pack.json']).toString());
+    assert.equal(manifest.version, pkg.version);
+    assert.equal(manifest.package, pkg.name);
+    assert.equal(manifest.skills.length, 5);
+    for (const { name } of manifest.skills) {
+      const skill = unzipSync(bundle[`${name}.zip`]);
+      assert.deepEqual(Buffer.from(skill['SKILL.md']),
+        await readFile(path.join(directory, 'skills', name, 'SKILL.md')), name);
+      const version = JSON.parse(Buffer.from(skill['references/pack-version.json']).toString());
+      assert.equal(version.version, pkg.version);
+      assert.equal(version.package, pkg.name);
+    }
+  }
+});
+
 test('site builder refuses unrelated outputs and symlinked public content', async t => {
   const directory = await fixture(t);
   await mkdir(path.join(directory, '_site'));

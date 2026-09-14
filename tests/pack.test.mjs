@@ -38,12 +38,17 @@ test('five independent root-layout skill ZIPs include every local reference and 
   assert.deepEqual(Object.keys(artifacts).filter(name => name.endsWith('.zip') && name !== 'Wingmate-Skills.zip'),
     names.map(name => `${name}.zip`));
   const pkg = JSON.parse(await readFile(path.join(root, 'package.json')));
-  const sharedMethod = await readFile(path.join(root, 'references/methodology.md'));
+  const sharedReferences = await Promise.all((await readdir(path.join(root, 'references')))
+    .map(async file => [file, await readFile(path.join(root, 'references', file))]));
   for (const name of names) {
     const files = unzipSync(artifacts[`${name}.zip`]);
     assert.equal(validateSkill(name, files).name, name);
     assert.equal(Object.keys(files).length, 11);
-    assert.deepEqual(Buffer.from(files['references/methodology.md']), sharedMethod);
+    assert.deepEqual(Buffer.from(files['SKILL.md']),
+      await readFile(path.join(root, 'skills', name, 'SKILL.md')), `${name}: canonical skill body`);
+    for (const [file, bytes] of sharedReferences) {
+      assert.deepEqual(Buffer.from(files[`references/${file}`]), bytes, `${name}: ${file}`);
+    }
     const version = JSON.parse(Buffer.from(files['references/pack-version.json']).toString());
     assert.equal(version.version, pkg.version);
     assert.equal(version.package, pkg.name);
@@ -57,6 +62,31 @@ test('five independent root-layout skill ZIPs include every local reference and 
     assert.doesNotMatch(body, /```(?:bash|powershell|javascript)/);
     assert.match(Buffer.from(files.LICENSE).toString(), /Microsoft Corporation/);
     assert.match(Buffer.from(files.LICENSE).toString(), /Matt Pocock/);
+  }
+});
+
+test('optimized skills retain explicit routing, output formats, and guardrails', async () => {
+  const artifacts = await assemblePack();
+  const outputMarkers = {
+    'shape-my-app': ['Business objective', 'Visual Direction', 'Non-goals & deferred'],
+    'design-my-data': ['Sources', 'Operations', 'Sensitivity', 'Blockers'],
+    'pressure-test-my-prototype': ['Findings', 'Paths walked', 'Visual check', 'Executed tests'],
+    'prove-my-app-works': ['Coverage table', 'Counts', 'Defects', 'Limitations', 'Human steps'],
+    'release-my-app-responsibly': ['Release scope', 'Readiness', 'Evidence', 'Data exposure'],
+  };
+  for (const name of names) {
+    const files = unzipSync(artifacts[`${name}.zip`]);
+    const { description } = validateSkill(name, files);
+    assert.match(description, /Use when the user says "/, name);
+    assert.match(description, /Do NOT use/, name);
+    const body = Buffer.from(files['SKILL.md']).toString();
+    const output = body.match(/## Output format\n([\s\S]*?)\n## Guardrails\n/);
+    assert.ok(output, `${name}: output format followed by guardrails`);
+    assert.match(body, /## When NOT to Use\n/);
+    assert.match(body, /after every workbook update during this skill/);
+    for (const marker of outputMarkers[name]) {
+      assert.ok(output[1].includes(marker), `${name}: missing output ${marker}`);
+    }
   }
 });
 

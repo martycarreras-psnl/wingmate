@@ -1,10 +1,19 @@
 ---
 name: design-my-data
-description: "Use when reviewing an app's source of truth, existing data reuse, records and relationships, connector operations, or data access before building or connecting a Cowork app. Produces a reviewed data plan; does not provision schema, bind connectors, or change permissions."
+description: "Turns an approved app brief into a reviewed data plan — authoritative sources, reuse-vs-create decisions, records and relationships, connector operations, and who-sees-what — before Cowork /app builds anything. Use when the user says \"where should this app's data live\", \"can we reuse existing data\", \"what tables does my app need\", \"check the data plan before I build\", \"who should be able to see this data\", or asks whether a connector supports an operation. Do NOT use for shaping the idea itself (use shape-my-app instead), testing a build (use prove-my-app-works), or publishing (use release-my-app-responsibly). Never provisions schema, binds connectors, or changes permissions."
 license: MIT
 ---
 
 # Design My Data
+
+## When NOT to Use
+
+- **Shaping the idea or scope** — use **shape-my-app**; this skill starts from an approved brief.
+- **Building the app or generating schema** — the native `/app` skill owns the build; never invoke it here.
+- **Testing a build** — use **prove-my-app-works**, or **pressure-test-my-prototype** for a preview.
+- **Publishing, sharing, or granting access** — use **release-my-app-responsibly**.
+- Any request to actually create tables, bind a connector, write records, or change permissions —
+  this skill plans and reviews only.
 
 ## Start here
 
@@ -55,6 +64,39 @@ or permission mutations.
 8. Present the plan and ask for `APPROVE DATA PLAN rN` against the actual revision.
    Brief approval must still cover the current scope. Record proposed controls
    separately from enforcement that still needs connected acceptance evidence.
+
+## Output format
+
+Deliver workbook section 3 as markdown in this order, in chat and in the workbook:
+
+```
+Sources          — table: concept | authoritative source | owner | evidence | reuse/extend/create
+Operations       — table: source | operation needed | verified supported? | evidence
+Records          — records, relationships, identifiers, required fields, states
+Rules            — validation, duplicates, conflicting updates, write failures, correction
+Access           — audience matrix: role | can see | can do | how enforced
+Sensitivity      — sensitivity, retention, audit, recovery decisions
+Blockers         — unverified capabilities and unresolved decisions, each with an owner
+```
+
+Mark every unverified capability as a blocker, never as an assumed pass. Close each turn with the
+single next question.
+
+## Guardrails
+
+- Never create schema, bind a connector, write records, or change permissions from this skill.
+- Always ask exactly one atomic question per turn, with a recommended answer, then wait.
+- Never treat lack of read access as proof that no reusable data exists — request an inventory or
+  owner confirmation instead.
+- Never assume a connector supports a write or schema-generation operation because read access works;
+  verify each operation separately and record it as a blocker if it cannot be confirmed.
+- Never treat hidden UI as access control, or assume sharing preserves source-level permissions.
+- If ownership, sensitivity, audience, or the authoritative source cannot be determined, record it as
+  an open blocker and ask; never fabricate an owner, a table, or an approval chain.
+- Always present the plan for review and confirm before treating it as approved — approval requires an
+  explicit `APPROVE DATA PLAN rN` from the human against the actual revision.
+- Do not state what native `/app` can do without checking
+  [platform boundaries](references/platform-boundaries.md) first.
 
 ## Native `/app` handoff
 

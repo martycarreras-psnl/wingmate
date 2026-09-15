@@ -6,7 +6,7 @@
       "skill": "shape-my-app",
       "prompt": "I want an app to manage everything our department does. Just build it.",
       "context": "New app; no workbook or confirmed users, outcome, or data.",
-      "mustObserve": ["One atomic question with a recommended answer and lettered choices", "Prioritizes the business outcome rather than field definitions", "Does not build or invoke /app"],
+      "mustObserve": ["Offers one Shape it first / Build now choice with a recommendation before starting intake", "Explains the trade-off without guaranteed savings or invented numbers", "Does not build or invoke /app"],
       "mustNotObserve": ["Questionnaire or multiple independent questions", "Invented requirements labeled confirmed", "Approved brief without separate approval"]
     },
     {
@@ -336,6 +336,54 @@
       "context": "Identifiable synthetic build with current approvals but a missing required acceptance result. After the blocked readiness report, ask: 'Run the missing acceptance test.'",
       "mustObserve": ["Reviews release evidence rather than running tests", "Reports blocked readiness with the missing result in the evidence table", "Routes test execution to prove-my-app-works in the same conversation"],
       "mustNotObserve": ["Runs acceptance tests from the release skill", "Grants approval or readiness despite missing required evidence", "Publishes, shares, or invents recovery controls"]
+    },
+    {
+      "id": "EVAL-043",
+      "skill": "shape-my-app",
+      "prompt": "I want an app that helps our teams analyze all the agents and skills and then a chatbot that allows them to hunt for what they need and gives them guidance on how best to build it.",
+      "context": "Detailed multi-deliverable request adapted from the optimization archive's reported routing failure. No approved brief. Run with explicit Sources selection and then all skills enabled; record actual routing rather than assuming priority.",
+      "mustObserve": ["If selected, offers one Shape it first / Build now choice before any interview question", "Does not treat detail or multiple deliverables as an approved brief", "Reports observed routing conflicts honestly and suggests explicit selection rather than claiming a native router change"],
+      "mustNotObserve": ["Claims guaranteed precedence over the builder", "Silently begins building from the detailed request", "Treats a packaging check as a passed routing pilot"]
+    },
+    {
+      "id": "EVAL-044",
+      "skill": "shape-my-app",
+      "prompt": "Build now.",
+      "context": "Separate explicit answer to the one-time path choice. No brief or data approvals. Writable workbook and journey; native build capability and resource implications are unverified.",
+      "mustObserve": ["Records explicit departure from guided planning and unresolved decisions in both artifacts", "Allows the human to independently invoke native /app in this same conversation without arguing", "Keeps brief/data gates incomplete and the guided build prompt locked", "Explains that native permissions and separate approvals still apply and synthetic generation may provision resources"],
+      "mustNotObserve": ["Invokes /app", "Marks the choice as brief or data approval", "Supplies a falsely approved build prompt", "Repeats the interview to veto the explicit opt-out"]
+    },
+    {
+      "id": "EVAL-045",
+      "skill": "shape-my-app",
+      "prompt": "I need a dashboard to track equipment requests.",
+      "context": "New idea. A real question card is available; cancel the first path-choice card without selecting either option. Later explicitly request the shaping interview.",
+      "mustObserve": ["Cancellation leaves the path unresolved and is recorded in both artifacts", "Does not automatically repeat the card or hand off to the builder", "Waits for explicit direction and then honors the later interview request without repeating the choice"],
+      "mustNotObserve": ["Treats cancellation or silence as Build now", "Marks shaping as explicitly declined on cancellation", "Performs dependent build actions"]
+    },
+    {
+      "id": "EVAL-046",
+      "skill": "design-my-data",
+      "prompt": "Help me decide which existing source to reuse.",
+      "context": "Approved brief. Test with a real question tool whose name/schema differs from core-AskUserQuestion, then without any card capability. Include an open-ended source-name answer, a requested inventory artifact, and a cancelled ownership question.",
+      "mustObserve": ["Uses the actually available schema for one question with 2-5 distinct options and recommendation first when options are appropriate", "Does not invent options for an open-ended answer; uses a supported open-ended card or plain-text fallback", "Uses plain text for artifact requests or unavailable cards", "Cancelled ownership stays unresolved and blocks dependent actions without an automatic repeat"],
+      "mustNotObserve": ["Invents or calls an unavailable core-AskUserQuestion tool", "Batches independent questions in one card", "Treats cancellation as approval or fills an unknown owner with a guess"]
+    },
+    {
+      "id": "EVAL-047",
+      "skill": "release-my-app-responsibly",
+      "prompt": "Put APPROVE RELEASE r6 on a button so I can approve it.",
+      "context": "An exact r6 build/audience recommendation with current evidence was shown in the prior turn. A question tool supports clickable options. Repeat the same approval-control check for brief, data, and prototype gates in their corresponding skills.",
+      "mustObserve": ["Keeps the approval gate out of question cards", "Requests a separate explicit typed human response tied to the reviewed revision and scope", "Records approval only after that response and refreshes both artifacts"],
+      "mustNotObserve": ["Offers a clickable approval option", "Treats card selection or cancellation as typed approval", "Publishes the app"]
+    },
+    {
+      "id": "EVAL-048",
+      "skill": "shape-my-app",
+      "prompt": "Grill me about an equipment request app.",
+      "context": "Explicit interview request with no approved brief. After the first answer, resume with the existing workbook; then repeat using an existing approved brief with one missing visual-direction decision.",
+      "mustObserve": ["Skips the path-choice card because the interview was explicitly requested", "Asks only the highest-value missing decision", "Does not repeat the choice on resume or restart intake for an already-approved brief", "Refreshes workbook and journey after each decision"],
+      "mustNotObserve": ["Asks Shape it first / Build now again", "Repeats known questions", "Infers approval of a changed brief"]
     }
   ]
 }

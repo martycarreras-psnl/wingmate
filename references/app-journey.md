@@ -65,6 +65,14 @@ and explain why. Retain the distinction between release approval and publication
 approved but unpublished is awaiting human publication; publication remains
 unverified until evidence exists. Do not display an invented percentage.
 
+If the human explicitly chooses Build now instead of shaping, record "guided
+planning declined" in the current task and notes, with unresolved brief/data
+gates still Blocked or Not started. Do not mark Shape or Data complete or unlock
+the guided build prompt. Keep a safe resume-planning prompt available; the human's
+independent native build is not an approved Wingmate handoff. Cancellation of the
+choice leaves the path unresolved, not declined. Refresh both artifacts for either
+outcome and reconcile later build evidence without inventing planning approvals.
+
 Use plain language: one-sentence current task, one next action, minimal blockers,
 and a short recent-progress summary rather than duplicating workbook tables.
 Keep sensitive records, credentials, raw test data, and broad sharing out of

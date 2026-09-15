@@ -1,6 +1,6 @@
 ---
 name: shape-my-app
-description: "Shapes a rough business app idea into an approved, scoped brief before Cowork /app builds anything — one clarifying question at a time, with a confirmed visual direction. Use when the user says \"help me shape my app idea\", \"grill me about this app\", \"define the MVP\", \"what should my app actually do\", \"pick a visual direction from my brand guide\", or shares an inspiration screenshot before building. Do NOT use for building the app, connecting data (use design-my-data instead), testing a build, or publishing."
+description: "Use FIRST for requests for a new app, tool, dashboard, portal, or chatbot, including detailed, multi-part enterprise asks. Length and detail do not replace an approved brief. Triggers on all app-request phrasing: \"I want an app that...\", \"I want to build an app for...\", \"I need an app that...\", \"we need something to track or analyze...\", \"an app and a chatbot that...\", \"help me shape my app idea\", \"grill me about this app\", \"define the MVP\". Offers a plan-first or build-now choice, interviews one question at a time, then hands off; routing priority over the native builder is not guaranteed. Do NOT use to generate or preview the app itself, nor for data plans (use design-my-data), testing (use prove-my-app-works), or publishing (use release-my-app-responsibly)."
 license: MIT
 ---
 
@@ -8,7 +8,11 @@ license: MIT
 
 ## When NOT to Use
 
-- **Building the app** — this skill never invokes `/app`; the native App skill owns the build.
+- **Generating, coding, or previewing the app itself** — this skill never invokes `/app`; the native
+  App skill owns the build, and this skill hands off to it once the brief is approved. Note the
+  distinction: a request to *build an app that does X* still belongs HERE first, because the idea has
+  not been shaped yet. Only route onward once the brief is approved, or when the user explicitly
+  declines the interview and asks to build immediately.
 - **Connecting data or choosing a schema** — use **design-my-data** instead, after the brief is approved.
 - **Testing an existing build** — use **prove-my-app-works** for acceptance testing, or
   **pressure-test-my-prototype** for a built preview.
@@ -41,9 +45,61 @@ non-goals; a human-reviewed brief including a confirmed visual direction.
 conflicting terminology that changes meaning; no explicit brief approval.
 Do not build, provision, or invoke `/app`.
 
+## First turn: offer the choice
+
+When ANY request for a new app, tool, dashboard, portal, or chatbot arrives without an approved
+brief — however long, detailed, or confidently specified it is, and including plain build phrasing
+like "build me an app that…" — do NOT start the interview silently, and do NOT hand straight to the
+builder. A detailed request is not a shaped one: length signals enthusiasm, not resolved decisions,
+and multi-deliverable asks ("an app AND a chatbot") need the interview most, because scope is the
+thing most likely to be wrong. Ask ONE
+question card first, before any other question, so the human chooses the path knowingly:
+
+- **Option A — Shape it first (recommended).** A focused interview, one question at a time, ending
+  in an approved brief with scoped requirements, explicit non-goals, and a confirmed visual
+  direction, which the native app builder then builds from.
+- **Option B — Build now.** Hand straight to the native app builder with what has been said so far.
+  This explicitly leaves Wingmate's guided planning path; it is not an approved build plan.
+
+State the trade-off plainly in the card, in the user's terms, not as sales copy:
+
+- **Controls drift.** The brief fixes scope, requirement IDs, and explicit non-goals up front, so
+  later work is checked against an agreed target instead of a moving one.
+- **Keeps focus.** One question at a time resolves the primary user and core outcome before
+  features accumulate, so the build starts from a decided shape rather than a guess.
+- **Produces far better requirements.** Each requirement gets an observable acceptance criterion,
+  which is what makes the later testing and release reviews meaningful rather than subjective.
+- **Usually costs less overall.** Deciding in conversation is typically cheaper than discovering a
+  wrong assumption after it has been built and rebuilding — though a genuinely small or throwaway
+  app can be cheaper to just build. Say it as a likelihood, never as a guaranteed saving, and never
+  quote a number you have not measured.
+
+Rules for this turn:
+
+- Recommend A for anything real, multi-user, long-lived, or touching business data; say plainly
+  that B is the reasonable choice for a throwaway, a demo, or an idea already well specified.
+- Ask this ONCE per idea. If the human explicitly picks B or explicitly asks to build without
+  the interview, hand off to the native app
+  builder without arguing, record in the workbook that shaping was declined and which decisions are
+  therefore unresolved, and offer the interview again only if they later hit rework.
+- An empty or cancelled card does not select B. Leave the path unresolved, update the workbook
+  and journey, and wait for an explicit direction without repeating the card.
+- Never treat B as approval of anything, and never let the choice itself become a second question.
+- If the human already asked for the interview explicitly ("grill me", "help me shape this"), skip
+  this card — the choice is already made — and go straight to the first real question.
+
+For an explicit Build now choice, tell the human they may independently invoke native `/app`
+here with the current context. Do not invoke it, manufacture an approved build prompt, or mark
+brief/data gates complete. Record this as leaving the guided path, not completing it; retain all
+unresolved decisions and approvals in the workbook and journey. Native permissions and separate
+approvals still apply, and generation may provision resources even for synthetic data.
+If they return for guided review, resume at the earliest unresolved decision without restarting
+known answers. The normal approved handoff below applies only to the guided path.
+
 ## Workflow
 
-1. Identify whether this is a new idea or revision. Reuse recorded decisions.
+1. Offer the plan-first / build-now choice above if it has not been made yet, then
+   identify whether this is a new idea or revision. Reuse recorded decisions.
    Reflect the business objective in a short paragraph, separating facts from
    assumptions. Ask the highest-value missing question, not a questionnaire.
 2. Use the shared grilling cadence on every turn: one atomic question, your
@@ -86,6 +142,34 @@ Deliver the brief as markdown sections in this order, in chat (and into the work
 Keep each requirement to one observable acceptance criterion. Close every turn with the single
 next question, never a questionnaire.
 
+## Asking the user questions
+
+Ask every clarifying question through the interactive question card
+(`core-AskUserQuestion`), not as plain text in your reply. The card is the default;
+plain text is the fallback.
+
+Use only a question tool actually exposed by the session and follow its advertised schema.
+`core-AskUserQuestion` is a host-specific example, not a guaranteed tool name or capability.
+If the host cannot represent an open-ended card, use the plain-text fallback.
+
+- **One question per card**, matching the one-atomic-question cadence — never batch the
+  interview into a multi-question card.
+- **The lettered alternatives become the options.** Offer 2-5, each a genuinely different
+  outcome, labelled by what happens rather than by position. Put your recommendation first
+  and begin its description with `Recommended —` plus the reason, so the recommendation
+  survives in the card.
+- **Open-ended answers** (a name, a number, a source, a description) use a card with an
+  empty options array rather than invented choices.
+- **Fall back to plain text** when the card is unavailable, when the answer is an artifact
+  the user must supply (a screenshot, a brand guide, a link, evidence), or when the options
+  cannot be enumerated honestly.
+- **Never put an approval gate on a card.** `APPROVE BRIEF rN`, `APPROVE DATA PLAN rN`,
+  `APPROVE PROTOTYPE rN` and `APPROVE RELEASE rN` must stay an explicit typed human
+  response, so approval remains deliberate and auditable.
+- An empty or cancelled card leaves the decision unresolved. Do not automatically repeat it,
+  select an option, or treat silence as consent. Continue only independent safe discussion;
+  dependent actions remain blocked until the human explicitly resolves the decision.
+
 ## Guardrails
 
 - Never invoke `/app`, provision resources, connect data, or write to any live system from this skill.
@@ -107,9 +191,10 @@ Continue that review in this same conversation using the answers already given.
 If routing needs assistance, suggest selecting it in Sources here; do not ask
 the user to start another chat or attach a workbook already available here.
 Brief approval does not authorize schema changes, live connections, writes,
-sharing, or publication. If the user wants to build immediately, explain the
-remaining data/access decision and ask that one question rather than silently
-invoking `/app`. A low-risk synthetic prototype can be considered in the next
+sharing, or publication. If the user explicitly chooses Build now, use the opt-out
+handoff above instead of repeating the interview or silently invoking `/app`.
+Otherwise, explain the remaining data/access decision and ask that one question.
+A low-risk synthetic prototype can be considered in the next
 phase without pretending unsupported mock-only capabilities exist.
 
 Report workbook revision/location, approved scope, remaining blockers, and next

@@ -37,6 +37,17 @@ descriptions. Instructions are not a guaranteed policy engine. Do not assume
 `AGENTS.md` discovery, repository inheritance, command hooks, subagents, automatic
 skill chaining, or programmatic invocation of `/app`.
 
+Broader shaping triggers do not guarantee priority over a built-in app router.
+The supplied optimization notes report routing contention; their internal router
+details and behavioral results have not been independently verified for Wingmate.
+Select Shape My App in Sources or explicitly say "shape this first" / "grill me"
+when routing needs help. Do not claim that this pack changes a native router.
+
+Interactive question cards depend on the tools actually exposed in the session.
+`core-AskUserQuestion` is a host-specific example, not a universal API. Follow the
+available tool schema and use plain text when the needed card is unavailable.
+Approval gates remain separate typed human responses, not card selections.
+
 Lack of guaranteed programmatic skill chaining does not imply separate chats.
 Default to the human invoking `/app` in the current conversation and selecting
 review skills there as needed. Carry forward available context. Only recommend

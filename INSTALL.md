@@ -26,6 +26,13 @@ You do not need an expert prompt. The skill asks one question at a time, offers
 a recommendation, and records the decisions. It invites visual preferences,
 brand guidance, or inspiration screenshots when useful.
 
+New ideas get a one-time **Shape it first / Build now** choice. Say "grill me"
+or "shape this first" to go straight to the interview. Build now explicitly
+leaves the guided path without approving unresolved plans or native actions;
+cancelling the question selects neither option. Cards are preferred when
+available, while approval gates remain separate typed responses. Built-in
+routing may still take precedence, so select Shape My App in Sources if needed.
+
 Keep planning, building, and reviews in that same conversation. Only native
 `/app` is a slash command; do not type `/shape-my-app`. The skills provide
 natural-language next prompts and a scoped native build handoff when ready.

@@ -69,8 +69,15 @@ it never authorizes app/data mutations. It requires no browser/computer use.
 - Include your recommended answer and why it fits the known facts.
 - Offer **A)**, **B)**, **C)** choices when alternatives exist, one per line.
   Mark your choice with *(recommended)*. Invite a letter, or multiple letters
-  only when the choices can coexist. If the interface offers a question tool,
-  put the lettered choices in that tool rather than asking a second question.
+  only when the choices can coexist. Prefer an available interactive question
+  card: one question, 2-5 distinct options, recommendation first with its reason.
+  Follow the actual tool schema, not an assumed tool name. Open-ended cards
+  need no invented options; use plain text if unsupported. Artifact requests
+  and questions whose options cannot be enumerated honestly may use plain text.
+  Do not duplicate a card question in chat. Approval gates are excluded from
+  cards and require a separate, explicit typed human response after review.
+  Cancellation leaves a decision unresolved and dependent actions blocked;
+  do not repeat the card automatically or infer an option from silence.
 - Never combine two decisions using "and", "also", or "plus". A turn can explain
   a finding but must ask only one question.
 - Walk dependencies depth-first. Inspect available evidence before asking.
@@ -151,12 +158,21 @@ Use human procedures only for blocked execution or operations outside safe scope
 
 ## Handoff contract
 
+Shape My App offers a one-time planning choice for new ideas, including detailed
+multi-deliverable requests. Skip the choice for an explicit interview request or
+an already-recorded path. An explicit Build now choice leaves the guided path;
+it does not satisfy its gates. The human may independently invoke native `/app`
+in this conversation, subject to native permissions and separate approvals.
+Do not invoke it, supply an approved build prompt, or mark incomplete planning
+complete. Record unresolved decisions in both artifacts and resume at the earliest
+missing decision if guided work resumes. A cancelled choice is not Build now.
+
 Link the saved journey with its current stage, blocker, and copyable next prompt.
 If its refresh failed, explicitly identify it as stale/unsaved.
 
 Summarize current phase, workbook revision/location, decisions approved,
 unresolved blockers, and one next action in this same conversation. Reuse the
 current workbook and context; request attachments only for genuinely missing
-evidence. Do not instruct a user to build or publish while its gate is
+evidence. Within the guided path, do not instruct a user to build or publish while its gate is
 blocked. Do not automatically restart `/app`, and do not claim the next skill
 ran. If a requested change changes scope, return to the relevant earlier phase.

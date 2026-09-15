@@ -77,16 +77,72 @@ test('optimized skills retain explicit routing, output formats, and guardrails',
   for (const name of names) {
     const files = unzipSync(artifacts[`${name}.zip`]);
     const { description } = validateSkill(name, files);
-    assert.match(description, /Use when the user says "/, name);
+    assert.match(description, name === 'shape-my-app'
+      ? /Triggers on all app-request phrasing: "/
+      : /Use when the user says "/, name);
     assert.match(description, /Do NOT use/, name);
     const body = Buffer.from(files['SKILL.md']).toString();
-    const output = body.match(/## Output format\n([\s\S]*?)\n## Guardrails\n/);
-    assert.ok(output, `${name}: output format followed by guardrails`);
+    const output = body.match(/## Output format\n([\s\S]*?)\n## /);
+    assert.ok(output, `${name}: output format`);
+    assert.match(body, /## Guardrails\n/);
     assert.match(body, /## When NOT to Use\n/);
     assert.match(body, /after every workbook update during this skill/);
     for (const marker of outputMarkers[name]) {
       assert.ok(output[1].includes(marker), `${name}: missing output ${marker}`);
     }
+  }
+});
+
+test('all skills bundle consistent capability-aware question cards and typed approvals', async () => {
+  const artifacts = await assemblePack();
+  const sections = [];
+  for (const name of names) {
+    const files = unzipSync(artifacts[`${name}.zip`]);
+    const body = Buffer.from(files['SKILL.md']).toString();
+    const section = body.match(/## Asking the user questions\n([\s\S]*?)\n## Guardrails\n/);
+    assert.ok(section, `${name}: question-card contract`);
+    sections.push(section[1]);
+    for (const rule of [
+      'One question per card', 'Offer 2-5', 'recommendation first',
+      'question tool actually exposed', 'follow its advertised schema',
+      'empty options array', 'Fall back to plain text',
+      'Never put an approval gate on a card', 'explicit typed human',
+      'empty or cancelled card leaves the decision unresolved',
+      'dependent actions remain blocked',
+    ]) assert.ok(section[1].includes(rule), `${name}: missing ${rule}`);
+    for (const approval of ['BRIEF', 'DATA PLAN', 'PROTOTYPE', 'RELEASE']) {
+      assert.ok(section[1].includes(`APPROVE ${approval} rN`), `${name}: ${approval}`);
+    }
+  }
+  assert.equal(new Set(sections).size, 1, 'Question-card contract must agree across all skills');
+});
+
+test('new-app choice preserves explicit opt-out, unresolved gates, and routing limits', async () => {
+  const files = unzipSync((await assemblePack())['shape-my-app.zip']);
+  const { description } = validateSkill('shape-my-app', files);
+  assert.match(description, /detailed, multi-part enterprise asks/);
+  assert.match(description, /routing priority over the native builder is not guaranteed/);
+  const body = Buffer.from(files['SKILL.md']).toString();
+  for (const rule of [
+    '## First turn: offer the choice', 'Option A', 'Option B',
+    'Ask this ONCE per idea', 'already asked for the interview explicitly',
+    'never as a guaranteed saving', 'never\n  quote a number you have not measured',
+    'empty or cancelled card does not select B',
+    'may independently invoke native `/app`',
+    'Do not invoke it, manufacture an approved build prompt',
+    'unresolved decisions and approvals in the workbook and journey',
+  ]) assert.ok(body.includes(rule), `Missing first-turn rule: ${rule}`);
+  assert.doesNotMatch(body, /picks B, or declines the card/);
+  const journey = Buffer.from(files['references/app-journey.md']).toString();
+  assert.match(journey, /Do not mark Shape or Data complete/);
+  assert.match(journey, /Cancellation of the\nchoice leaves the path unresolved/);
+  const method = Buffer.from(files['references/methodology.md']).toString();
+  assert.match(method, /A cancelled choice is not Build now/);
+  const boundaries = Buffer.from(files['references/platform-boundaries.md']).toString();
+  assert.match(boundaries, /do not guarantee priority over a built-in app router/);
+  const cases = JSON.parse(await readFile(path.join(root, 'evaluations/scenarios.json'))).cases;
+  for (const id of ['EVAL-043', 'EVAL-044', 'EVAL-045', 'EVAL-046', 'EVAL-047', 'EVAL-048']) {
+    assert.ok(cases.some(item => item.id === id), `Missing new behavior pilot: ${id}`);
   }
 });
 

@@ -105,6 +105,34 @@ Separate a preference from a workflow defect or an incorrect business model in e
 Show the findings table before asking the next question, and review it with the user before recording
 any accept/reject/defer decision.
 
+## Asking the user questions
+
+Ask every clarifying question through the interactive question card
+(`core-AskUserQuestion`), not as plain text in your reply. The card is the default;
+plain text is the fallback.
+
+Use only a question tool actually exposed by the session and follow its advertised schema.
+`core-AskUserQuestion` is a host-specific example, not a guaranteed tool name or capability.
+If the host cannot represent an open-ended card, use the plain-text fallback.
+
+- **One question per card**, matching the one-atomic-question cadence — never batch the
+  interview into a multi-question card.
+- **The lettered alternatives become the options.** Offer 2-5, each a genuinely different
+  outcome, labelled by what happens rather than by position. Put your recommendation first
+  and begin its description with `Recommended —` plus the reason, so the recommendation
+  survives in the card.
+- **Open-ended answers** (a name, a number, a source, a description) use a card with an
+  empty options array rather than invented choices.
+- **Fall back to plain text** when the card is unavailable, when the answer is an artifact
+  the user must supply (a screenshot, a brand guide, a link, evidence), or when the options
+  cannot be enumerated honestly.
+- **Never put an approval gate on a card.** `APPROVE BRIEF rN`, `APPROVE DATA PLAN rN`,
+  `APPROVE PROTOTYPE rN` and `APPROVE RELEASE rN` must stay an explicit typed human
+  response, so approval remains deliberate and auditable.
+- An empty or cancelled card leaves the decision unresolved. Do not automatically repeat it,
+  select an option, or treat silence as consent. Continue only independent safe discussion;
+  dependent actions remain blocked until the human explicitly resolves the decision.
+
 ## Guardrails
 
 - Never invoke, troubleshoot, or recommend browser/computer use, including alternate browser runners.

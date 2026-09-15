@@ -15,5 +15,11 @@ CONTRIBUTING.md, and the relevant skill/reference before editing.
   No external script, telemetry, live credentials, or hidden tool integration.
 - For shipped behavior changes, update version/changelog, regenerate downloads,
   and run npm run check. Preserve license attribution.
-- Do not publish the GitHub site/release or create external resources without
-  owner approval. No parent repository or upstream sync exists.
+- The owner has granted standing approval to commit, push, and deploy the
+  existing Wingmate website after each requested skill update, unless they
+  explicitly ask to hold it. Run the checks, include rebuilt downloads, preserve
+  concurrent work, and verify the live download matches the committed version.
+  Use the existing Pages configuration; never force-push or bypass protections.
+- This standing approval does not authorize GitHub Releases, new external
+  resources, or publishing generated apps. Those still need separate owner
+  approval. No parent repository or upstream sync exists.

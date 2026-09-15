@@ -1,5 +1,22 @@
 # Changelog
 
+## 0.2.0 - 2026-09-15
+
+- Integrate the five revised skill bodies from `app-journey-skills (1).zip`,
+  including question-card guidance and broader new-app shaping triggers.
+- Add the one-time Shape it first / Build now choice, skipping it for explicit
+  interview requests and retaining previously recorded decisions.
+- Reconcile the attachment with Wingmate's approval contract: cancellation does
+  not choose Build now; explicit opt-out leaves guided gates unresolved, does
+  not authorize native actions, and is recorded in both workbook and journey.
+- Make question-tool names and schemas capability-dependent, keep typed approval
+  gates outside cards, and document the unverified native-routing limitation.
+- Preserve current branding, license attribution, and platform boundaries rather
+  than restoring the attachment's older shared references and package metadata.
+- Add question-card, cancellation, opt-out, and routing pilot coverage; rebuild
+  all skill downloads and the site-linked bundle. Archive-reported scores and
+  behavioral results are not independent validation of this Wingmate version.
+
 ## 0.1.2 - 2026-09-14
 
 - Import all five optimized `SKILL.md` files from the supplied

@@ -46,6 +46,13 @@ Sources picker if needed and say:
 The skills maintain the details. You do not need to memorize the method or
 write a requirements document first.
 
+For a new idea, Shape My App offers **Shape it first** (recommended) or **Build
+now** once. Explicit interview requests skip that choice. Build now leaves the
+guided planning path; it does not approve a brief, data plan, or native action.
+Question cards are preferred when available, with plain-text fallbacks. Approval
+gates remain separate typed responses. Automatic routing priority is not
+guaranteed; select Shape My App in Sources or say "shape this first" if needed.
+
 The **App Workbook** records requirements, business terms, visual direction,
 data decisions, findings, evidence, revisions, and explicit approvals.
 **App-Journey.html** turns that record into a simple six-stage map: where you are,
@@ -118,7 +125,7 @@ The all-in-one download bundle lives in `downloads/Wingmate-Skills.zip`.
 | `skills/` | Five canonical `SKILL.md` bodies |
 | `references/` | Shared method, workbook, journey HTML, visual direction, and testing guidance |
 | `catalog.json` | Skill names and phase mapping |
-| `evaluations/` | 42 behavioral pilot scenarios and procedure |
+| `evaluations/` | 48 behavioral pilot scenarios and procedure |
 | `scripts/`, `bin/`, `tests/` | Standalone build, export, site staging, and checks |
 | `downloads/` | Committed, generated distribution; do not edit directly |
 | `index.html`, `assets/` | Public landing page |

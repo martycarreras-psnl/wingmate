@@ -106,6 +106,13 @@ Verify guide creation when starting at a later skill with an existing workbook.
   out-of-phase request with explicit selection and with all skills enabled.
   Confirm routing preserves the current workbook, journey, and unresolved gates.
 
+- Run EVAL-043 through EVAL-048 for detailed real-world routing, explicit Build
+  now opt-out, cancelled cards, actual tool schemas and fallbacks, typed approvals,
+  and explicit interview/resume behavior. Repeat question-card checks across all
+  five skills. No available card means the card behavior is untested, not passed;
+  test the fallback separately. Record native-router contention as observed,
+  without claiming this pack can modify or reliably override platform routing.
+
 Cowork may expose native skill evaluation. If available, use it alongside these
 cases, not as a replacement for the app journey or as Microsoft certification.
 No tenant evaluation results are bundled in this pack. Quality scores and test
